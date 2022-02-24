@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-// authentication
+// =========================     authentication
 const verifyToken = (req, res, next) => {
   if (req.headers.token) {
     const token = req.headers.token.split(" ")[1];
@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// authrization to specific route, in order to edit
+//==========================  authorize to specific route, in order to edit
 const authorize = (req, res, next) => {
   // console.log(req.user._id, req.params.id);
   if (req.user._id === req.params.id || req.user.isAdmin) {
@@ -25,9 +25,8 @@ const authorize = (req, res, next) => {
   } else res.status(403).json("You are not allowed to do that");
 };
 
-// authrization only for admin
+// ====================       authorize only for admin
 const adminAuthorize = (req, res, next) => {
-  // console.log(req.user._id, req.params.id);
   if (req.user.isAdmin) {
     // console.log("authorizeation succeed");
     next();
